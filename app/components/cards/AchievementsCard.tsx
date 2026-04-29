@@ -37,7 +37,7 @@ export function AchievementsCard({
               <li key={item.title} className={dividerClass}>
                 <Link
                   href={item.href}
-                  className="group flex items-start justify-between gap-3 -mx-2 rounded-lg px-2 py-3 transition-colors duration-200 hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+                  className="group flex cursor-pointer items-start justify-between gap-3 -mx-2 rounded-lg px-2 py-3 transition-colors duration-200 hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
                 >
                   <div className="min-w-0">
                     <div className="text-sm font-medium text-white">
