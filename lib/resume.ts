@@ -159,11 +159,6 @@ export const latest: LatestItem[] = [
     title: "GCP Certification (NIDA CTN)",
     type: "certification",
   },
-  {
-    date: "May 2026",
-    title: "BWSI Biotechnology — completing soon",
-    type: "completion",
-  },
 ];
 
 export interface Certification {
