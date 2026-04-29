@@ -74,6 +74,7 @@ export interface Achievement {
   title: string;
   issuer?: string;
   date: string;
+  href?: string;
 }
 
 export const achievements: Achievement[] = [
@@ -81,6 +82,7 @@ export const achievements: Achievement[] = [
     title:
       "Harvard YPHS — Interdisciplinary Discussion on Disease and Health Award",
     date: "April 2026",
+    href: "/achievements/harvard-yphs",
   },
   {
     title: "Good Clinical Practice (GCP) Certification",
@@ -252,6 +254,45 @@ export const sheriffLabDetail: InternshipDetail = {
     "Field data collection and documentation",
   ],
 };
+
+export const harvardYPHSDetail = {
+  slug: "harvard-yphs",
+  title: "Harvard YPHS — Disease and Health Award",
+  subtitle: "Youth Public Health Symposium · April 2026",
+  dateRange: "April 2026",
+  location: "Harvard University · In person",
+  award: "Selected for the Interdisciplinary Discussion on Disease and Health Award",
+  overview:
+    "A two-day national symposium at Harvard for high school students accepted through a competitive application process. Attendees presented on a public health issue affecting their generation; presentations were reviewed by Harvard professors and PhD students.",
+  projectTitle: "Generative AI and the Teen Mental Health Gap",
+  sections: [
+    {
+      heading: "The program",
+      body:
+        "The Harvard Youth Public Health Symposium (YPHS) brings selected high school students from across the country to Harvard for two days of public health programming. Students apply, present an optional research talk on a public health issue affecting young people, and engage in faculty-led discussions on contemporary health challenges.",
+    },
+    {
+      heading: "The project",
+      body:
+        "I delivered a full-room talk with a slide deck proposing a two-step public health analysis of how generative AI use is affecting teen mental health. The motivation: ChatGPT became publicly available in November 2022, reached 100 million users in two months, and by 2024 about 70% of U.S. teens had used generative AI for schoolwork — yet there is almost no peer-reviewed work on how this rapid adoption is affecting adolescent stress, sleep, and academic anxiety. Public health typically arrives after the damage is done. The point of the project was to show up while the data is still being written, so that schools and parents can act on evidence rather than panic.",
+    },
+    {
+      heading: "Data sources",
+      body:
+        "The project used publicly available federal and academic survey data, including Monitoring the Future (University of Michigan) for long-term trends in academic stress, sleep, and technology use; the CDC's Youth Risk Behavior Survey (YRBS) for biennial mental health and sleep indicators; and Common Sense Media's 'Teens and AI' reports plus Pew Research's teen technology surveys for direct measures of AI usage frequency. Key variables: AI use frequency on the exposure side; academic anxiety and sleep duration on the outcome side; grade level, sex, and total social media use as controls.",
+    },
+    {
+      heading: "Methodology",
+      body:
+        "I proposed a two-step analysis where each step checks the other. Step one is a trend-break analysis: plot teen academic-anxiety and sleep-duration trends from 2015 through 2024 and look for a slope or level change starting in late 2022, when ChatGPT became available — controlling for post-pandemic recovery as a confounder. Step two is a within-cohort comparison: among teens surveyed after ChatGPT existed, compare heavy AI users to non-users on the same outcomes, adjusting for grade, sex, and total social media use. If both steps point the same direction, the evidence converges. If they disagree, that's an even more interesting finding — it would suggest the effect is concentrated in a subgroup rather than population-wide.",
+    },
+    {
+      heading: "The award",
+      body:
+        "Selected for the Interdisciplinary Discussion on Disease and Health Award at the close of the symposium.",
+    },
+  ],
+} as const;
 
 export const mlscDetail: InternshipDetail = {
   slug: "mlsc",

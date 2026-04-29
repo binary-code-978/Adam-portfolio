@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { mlscDetail } from "@/lib/resume";
-import { InternshipDetailPage } from "@/app/components/InternshipDetailPage";
+import { DetailPage } from "@/app/components/DetailPage";
 
 export const metadata: Metadata = {
   title: mlscDetail.title,
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function MlscPage() {
-  return <InternshipDetailPage detail={mlscDetail} />;
+  return <DetailPage data={mlscDetail} />;
 }

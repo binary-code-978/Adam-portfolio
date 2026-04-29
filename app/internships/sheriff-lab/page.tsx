@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { sheriffLabDetail } from "@/lib/resume";
-import { InternshipDetailPage } from "@/app/components/InternshipDetailPage";
+import { DetailPage } from "@/app/components/DetailPage";
 
 export const metadata: Metadata = {
   title: sheriffLabDetail.title,
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SheriffLabPage() {
-  return <InternshipDetailPage detail={sheriffLabDetail} />;
+  return <DetailPage data={sheriffLabDetail} />;
 }
