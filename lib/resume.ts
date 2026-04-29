@@ -34,6 +34,123 @@ export interface CurrentProject {
   status: "active" | "completing soon" | "upcoming";
 }
 
+export interface Achievement {
+  title: string;
+  issuer?: string;
+  date: string;
+}
+
+export const achievements: Achievement[] = [
+  {
+    title:
+      "Harvard YPHS — Interdisciplinary Discussion on Disease and Health Award",
+    date: "April 2026",
+  },
+  {
+    title: "Good Clinical Practice (GCP) Certification",
+    issuer: "NIDA Clinical Trials Network",
+    date: "April 2026",
+  },
+  {
+    title:
+      "MITx 6.00.1x — Introduction to CS and Programming Using Python",
+    date: "September 2024",
+  },
+  {
+    title: "Dartmouth Math SMCML Tournament Winner",
+    date: "April 2024",
+  },
+  {
+    title: "BYJU'S Future School Code of Honor Certificate",
+    date: "August 2022",
+  },
+];
+
+export interface LeadershipRole {
+  title: string;
+  organization?: string;
+  date: string;
+}
+
+export const leadershipRoles: LeadershipRole[] = [
+  {
+    title: "Captain, Dartmouth High School Chess Team",
+    date: "August 2025 – Present",
+  },
+  {
+    title: "Peer Tutor — Algebra 2",
+    organization: "Dartmouth High School Math Department",
+    date: "Spring 2026 – Present",
+  },
+  {
+    title: "Captain, Dartmouth Middle School Robotics",
+    date: "October 2023 – June 2024",
+  },
+  {
+    title: "President, National Junior Honor Society",
+    date: "May 2023",
+  },
+  {
+    title: "Second Degree Black Belt, Taekwondo",
+    date: "June 2021",
+  },
+];
+
+export const activities: string[] = [
+  "Math Team",
+  "Debate Team",
+  "Investment Club",
+  "DHS Tennis",
+  "New Bedford Hurricanes Swim Team",
+  "Chess Team",
+  "DMS Robotics",
+];
+
+export interface LatestItem {
+  date: string;
+  title: string;
+  type: "achievement" | "certification" | "completion" | "milestone";
+}
+
+export const latest: LatestItem[] = [
+  {
+    date: "Apr 2026",
+    title: "Harvard YPHS — Disease and Health Award",
+    type: "achievement",
+  },
+  {
+    date: "Apr 2026",
+    title: "GCP Certification (NIDA CTN)",
+    type: "certification",
+  },
+  {
+    date: "May 2026",
+    title: "BWSI Biotechnology — completing soon",
+    type: "completion",
+  },
+];
+
+export interface Certification {
+  name: string;
+  issuer: string;
+  issuedDate: string;
+  expirationDate?: string;
+  description: string;
+  selfMotivated?: boolean;
+}
+
+export const certifications: Certification[] = [
+  {
+    name: "Good Clinical Practice (GCP)",
+    issuer: "NIDA Clinical Trials Network",
+    issuedDate: "April 2026",
+    expirationDate: "April 2029",
+    description:
+      "Independently completed the six-hour course covering IRBs, informed consent, participant safety, research protocol, documentation, and research misconduct. Pursued out of personal interest in clinical research methodology.",
+    selfMotivated: true,
+  },
+];
+
 export interface InternshipSection {
   heading: string;
   body?: string;
@@ -293,6 +410,7 @@ export const resume: Resume = {
     "Lab Documentation",
     "Public Speaking",
     "Critical Thinking & Problem Solving",
+    "GCP-certified (NIDA CTN)",
   ],
   volunteer: [
     {

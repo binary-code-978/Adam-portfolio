@@ -6,6 +6,7 @@ import { resume } from "@/lib/resume";
 interface HeroCardProps {
   className?: string;
   index?: number;
+  id?: string;
 }
 
 const heroPills = [
@@ -51,20 +52,21 @@ function HelixDecoration() {
   );
 }
 
-export function HeroCard({ className = "", index = 0 }: HeroCardProps) {
+export function HeroCard({ className = "", index = 0, id }: HeroCardProps) {
   const dartmouth = resume.education.find((e) =>
     e.school.includes("Dartmouth")
   );
 
   return (
     <motion.div
+      id={id}
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.1 }}
       className={
-        "relative flex min-w-0 flex-col justify-between overflow-hidden rounded-2xl bg-[#131316] p-6 sm:p-8 md:p-10 " +
+        "relative flex min-w-0 flex-col justify-between overflow-hidden scroll-mt-24 rounded-2xl bg-[#131316] p-6 sm:p-8 md:p-10 " +
         "border-[0.5px] border-white/[0.08] hover:border-white/20 " +
         "transition-colors duration-300 " +
         className

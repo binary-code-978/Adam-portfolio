@@ -4,15 +4,17 @@ import { resume } from "@/lib/resume";
 interface WorkCardProps {
   className?: string;
   index?: number;
+  id?: string;
 }
 
-export function WorkCard({ className = "", index = 0 }: WorkCardProps) {
+export function WorkCard({ className = "", index = 0, id }: WorkCardProps) {
   const mlsc = resume.work.find((w) => w.role.includes("MLSC"));
 
   if (!mlsc) return null;
 
   return (
     <Card
+      id={id}
       eyebrow="summer 2024"
       title="MLSC apprenticeship"
       className={className}

@@ -14,6 +14,7 @@ interface CardProps {
   index?: number;
   href?: string;
   ariaLabel?: string;
+  id?: string;
 }
 
 export function Card({
@@ -25,16 +26,18 @@ export function Card({
   index = 0,
   href,
   ariaLabel,
+  id,
 }: CardProps) {
   return (
     <motion.div
+      id={id}
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -2 }}
       transition={{ duration: 0.7, ease: "easeOut", delay: index * 0.1 }}
       className={
-        "relative flex min-w-0 flex-col rounded-2xl bg-[#131316] p-6 " +
+        "relative flex min-w-0 flex-col scroll-mt-24 rounded-2xl bg-[#131316] p-6 " +
         "border-[0.5px] border-white/[0.08] hover:border-white/20 " +
         "transition-colors duration-300 " +
         (href ? "group " : "") +

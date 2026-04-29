@@ -4,11 +4,12 @@ import { resume } from "@/lib/resume";
 interface ContactCardProps {
   className?: string;
   index?: number;
+  id?: string;
 }
 
-export function ContactCard({ className = "", index = 0 }: ContactCardProps) {
+export function ContactCard({ className = "", index = 0, id }: ContactCardProps) {
   return (
-    <Card eyebrow="let's connect" className={className} index={index}>
+    <Card id={id} eyebrow="let's connect" className={className} index={index}>
       <ul className="flex flex-col gap-3">
         <li>
           <div className="text-xs text-white/55">email</div>

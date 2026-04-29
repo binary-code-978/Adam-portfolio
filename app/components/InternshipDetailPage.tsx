@@ -35,29 +35,43 @@ export function InternshipDetailPage({ detail }: InternshipDetailPageProps) {
         </p>
       </MotionSection>
 
-      {detail.sections.map((section, i) => (
-        <MotionSection key={section.heading} index={2 + i}>
-          <h2 className={headingClass}>{section.heading}</h2>
-          {section.body ? <p className={bodyClass}>{section.body}</p> : null}
-          {section.bullets ? (
-            <ul
-              className={
-                "max-w-2xl space-y-2 " + (section.body ? "mt-4" : "")
-              }
-            >
-              {section.bullets.map((b) => (
-                <li
-                  key={b}
-                  className="flex gap-3 text-base text-white/70 leading-relaxed"
-                >
-                  <span className="text-white/30 select-none">•</span>
-                  <span>{b}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-        </MotionSection>
-      ))}
+      {detail.sections.map((section, i) => {
+        const isPlaceholder = section.body?.trimStart().startsWith("[PLACEHOLDER");
+        return (
+          <MotionSection key={section.heading} index={2 + i}>
+            <h2 className={headingClass}>{section.heading}</h2>
+            {section.body ? (
+              isPlaceholder ? (
+                <div className="max-w-2xl rounded-xl border border-amber-400/30 bg-amber-400/5 px-4 py-3 text-sm text-amber-200/90 leading-relaxed">
+                  <div className="mb-1 text-[11px] font-medium uppercase tracking-wider text-amber-300/80">
+                    Draft — Adam to fill in
+                  </div>
+                  <p>{section.body}</p>
+                </div>
+              ) : (
+                <p className={bodyClass}>{section.body}</p>
+              )
+            ) : null}
+            {section.bullets ? (
+              <ul
+                className={
+                  "max-w-2xl space-y-2 " + (section.body ? "mt-4" : "")
+                }
+              >
+                {section.bullets.map((b) => (
+                  <li
+                    key={b}
+                    className="flex gap-3 text-base text-white/70 leading-relaxed"
+                  >
+                    <span className="text-white/30 select-none">•</span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
+          </MotionSection>
+        );
+      })}
 
       <MotionSection index={2 + detail.sections.length}>
         <h2 className={headingClass}>Techniques used</h2>
