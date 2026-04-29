@@ -1,3 +1,39 @@
+/**
+ * ────────────────────────────────────────────────────────────────────
+ * 📌 ADAM — TO DO LIST
+ * ────────────────────────────────────────────────────────────────────
+ * These items are currently hidden from the live site or contain
+ * placeholder text. Fill them in here, then run:
+ *   git add . && git commit -m "fill in <thing>" && git push
+ *
+ * 1. Sheriff lab "what I learned" reflection
+ *    → search for: sheriffLabDetail
+ *    → find the section with heading "What I took away"
+ *    → replace the [PLACEHOLDER] body with 2–3 honest sentences
+ *    → set `hidden: false` on that section to re-enable
+ *
+ * 2. MLSC "what I took away" reflection
+ *    → search for: mlscDetail
+ *    → same as above
+ *
+ * 3. Yale collaboration — replace placeholder detail
+ *    → search for: currentlyWorkingOn
+ *    → find the "Yale collaboration" entry
+ *    → replace "Early-stage research collaboration" with one specific
+ *      sentence on what the actual Yale connection is
+ *
+ * 4. Nonprofit project — replace placeholder detail
+ *    → search for: currentlyWorkingOn
+ *    → find the "Nonprofit project" entry
+ *    → replace "Building a student-led initiative" with one specific
+ *      sentence on what the nonprofit does and your role
+ *
+ * 5. After May 2, 2026: BWSI Biotechnology completion
+ *    → re-add to `latest` array as a "completion" type
+ *    → move from `currentlyWorkingOn` to `achievements`
+ * ────────────────────────────────────────────────────────────────────
+ */
+
 export interface Contact {
   name: string;
   address: string;
@@ -155,6 +191,7 @@ export interface InternshipSection {
   heading: string;
   body?: string;
   bullets?: string[];
+  hidden?: boolean;
 }
 
 export interface InternshipDetail {
@@ -208,6 +245,7 @@ export const sheriffLabDetail: InternshipDetail = {
       heading: "What I took away",
       body:
         "[PLACEHOLDER — Adam, write 2–3 honest sentences here about what you learned. Examples to think about: how rigorous a field study really is when you have to be on-site at 6 AM every morning; what it taught you about study design and controls; what surprised you about the day-to-day reality of research vs. how research is portrayed; anything you now think about differently because of this summer.]",
+      hidden: true,
     },
   ],
   techniques: [
@@ -255,6 +293,7 @@ export const mlscDetail: InternshipDetail = {
       heading: "What I took away",
       body:
         "[PLACEHOLDER — Adam, write 2–3 honest sentences here. Examples: what was hardest at first, what felt natural, how this changed how you think about labs and biology, what you wanted to learn next after this summer ended.]",
+      hidden: true,
     },
   ],
   techniques: [
