@@ -31,6 +31,16 @@
  * 5. After May 2, 2026: BWSI Biotechnology completion
  *    → re-add to `latest` array as a "completion" type
  *    → move from `currentlyWorkingOn` to `achievements`
+ *
+ * 6. Sunshine Club details — currently shown as "Ongoing"
+ *    → search for: communityService
+ *    → find the "Sunshine Club" entry
+ *    → replace `"Ongoing"` with the actual start year (e.g., "2024 – Present")
+ *
+ * 7. Verify mosque hours total
+ *    → search for: communityService
+ *    → find the "Sunday School Volunteer" entry
+ *    → confirm `hours: 30` is still accurate, update if hours have grown
  * ────────────────────────────────────────────────────────────────────
  */
 
