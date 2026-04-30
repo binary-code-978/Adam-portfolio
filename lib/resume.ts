@@ -343,6 +343,67 @@ export const mlscDetail: InternshipDetail = {
   ],
 };
 
+export interface CommunityServiceItem {
+  title: string;
+  organization: string;
+  dateRange: string;
+  hours?: number;
+  summary: string;
+  href?: string;
+}
+
+export const communityService: CommunityServiceItem[] = [
+  {
+    title: "Sunday School Volunteer",
+    organization: "Islamic Society of Southeastern Massachusetts",
+    dateRange: "June 2021 – Present",
+    hours: 30,
+    summary:
+      "Teaching children ages 8–14 to pray, recite Qur'an, and assist around the mosque.",
+    href: "/community/mosque",
+  },
+  {
+    title: "Sunshine Club",
+    organization: "Dartmouth High School",
+    dateRange: "Ongoing",
+    summary:
+      "Bringing small moments of joy to community members through birthday cards and acts of kindness.",
+  },
+];
+
+export const totalCommunityServiceHours = communityService.reduce(
+  (total, item) => total + (item.hours ?? 0),
+  0
+);
+
+export const mosqueDetail = {
+  slug: "mosque",
+  title: "Sunday School Volunteer",
+  subtitle: "Islamic Society of Southeastern Massachusetts · 2021 – Present",
+  dateRange: "June 2021 – Present",
+  location: "New Bedford, Massachusetts",
+  award: "5+ years of weekly community service",
+  overview:
+    "Every Sunday for three hours I help teach children ages 8 to 14 at our local mosque — listening to Qur'an recitation, helping with prayer and pronunciation, and assisting teachers with whatever the day needs.",
+  sections: [
+    {
+      heading: "What I do",
+      body:
+        "Each session has 3 to 5 students. I work with them on prayer, Qur'an recitation, and Arabic pronunciation, and I help teachers with anything else that comes up — keeping younger students focused, handling logistics, and stepping in where I'm needed. The work is small in any given week and large over five years.",
+    },
+    {
+      heading: "Why it matters to me",
+      body:
+        "Being a Muslim is a minority experience in this part of Massachusetts, and the mosque is where the community actually comes together. Helping run Sunday school gives me a real role in that — sharing what I've been taught with kids who are growing up the same way I did. Honestly, doing this every week is part of what makes me hopeful for the future of Muslims in this area.",
+    },
+    {
+      heading: "Time commitment",
+      body:
+        "Every Sunday, three hours per session, since June 2021.",
+    },
+  ],
+} as const;
+
 export const currentlyWorkingOn: CurrentProject[] = [
   {
     title: "BWSI Biotechnology",
