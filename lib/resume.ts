@@ -373,6 +373,14 @@ export const communityService: CommunityServiceItem[] = [
     href: "/community/mosque",
   },
   {
+    title: "Community Service through NJHS",
+    organization: "National Junior Honor Society — Dartmouth Middle School",
+    dateRange: "August 2023 – May 2024",
+    hours: 150,
+    summary:
+      "Personal community service hours completed through National Junior Honor Society projects and events.",
+  },
+  {
     title: "Sunshine Club",
     organization: "Dartmouth High School",
     dateRange: "Ongoing",
