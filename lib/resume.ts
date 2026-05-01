@@ -353,6 +353,67 @@ export const mlscDetail: InternshipDetail = {
   ],
 };
 
+export interface Project {
+  title: string;
+  client: string;
+  dateRange: string;
+  status: "in development" | "shipped" | "prototype";
+  summary: string;
+  href?: string;
+}
+
+export const projects: Project[] = [
+  {
+    title: "Amac Neurology App",
+    client: "Amac Neurology and Sleep Associates",
+    dateRange: "Spring 2026 – Present",
+    status: "in development",
+    summary:
+      "A patient tracker app being built for a local neurology and sleep practice. Working prototype tested with physician feedback.",
+    href: "/projects/amac-neurology",
+  },
+];
+
+export const amacNeurologyAppDetail = {
+  slug: "amac-neurology",
+  title: "Amac Neurology App",
+  subtitle: "Patient tracker · Amac Neurology and Sleep Associates",
+  dateRange: "Spring 2026 – Present",
+  location: "Local neurology and sleep practice",
+  award: "In development · physician-tested prototype",
+  overview:
+    "A patient health tracker being built for Amac Neurology and Sleep Associates, a local neurology and sleep practice. The app gives patients a simple way to log the day-to-day data their physician needs at follow-ups — without the friction of paper diaries or scattered notes apps.",
+  sections: [
+    {
+      heading: "The problem it solves",
+      body:
+        "Neurology and sleep patients are typically asked to track symptom patterns between visits — headache frequency and triggers, sleep quality, medication response, pain levels, and other condition-specific data. In practice, most patients either forget to log consistently or end up with notes scattered across apps and notebooks. By the time they're back in the exam room, the data is incomplete or hard to interpret. A focused tracker designed for this specific practice's patients makes the data better and the visits more useful.",
+    },
+    {
+      heading: "What it tracks",
+      body:
+        "The app supports the kinds of logging that come up most often in neurology and sleep care:",
+      bullets: [
+        "Headache and migraine episodes — frequency, duration, severity, and triggers",
+        "Sleep — duration, quality, and disruptions",
+        "Chronic pain and condition-specific symptoms",
+        "Medication and treatment tracking",
+        "General symptom logging for anything else patients want to record",
+      ],
+    },
+    {
+      heading: "Design approach",
+      body:
+        "The app is designed local-first — patient data lives on the user's own device rather than on a remote server. This was a deliberate choice for several reasons. It keeps the tool simple for a small practice to deploy and recommend without standing up backend infrastructure. It removes the complexity and risk of hosting protected health information. And it matches how the most-used patient-tracker apps in the space already work, which means the experience is familiar to patients who've tried similar tools.",
+    },
+    {
+      heading: "Status",
+      body:
+        "The current build is a working prototype. The supervising physician has tested the app and given feedback, which is being used to refine the experience. Future development will focus on expanding the tracking categories, polishing the data review experience, and exploring options for sharing data with the practice during follow-up visits.",
+    },
+  ],
+} as const;
+
 export interface CommunityServiceItem {
   title: string;
   organization: string;
