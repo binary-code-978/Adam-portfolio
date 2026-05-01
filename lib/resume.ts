@@ -412,7 +412,7 @@ export const amacNeurologyAppDetail = {
         "The current build is a working prototype. The supervising physician has tested the app and given feedback, which is being used to refine the experience. Future development will focus on expanding the tracking categories, polishing the data review experience, and exploring options for sharing data with the practice during follow-up visits.",
     },
   ],
-} as const;
+};
 
 export interface CommunityServiceItem {
   title: string;
