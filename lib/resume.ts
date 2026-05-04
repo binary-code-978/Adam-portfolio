@@ -28,16 +28,12 @@
  *    → replace "Building a student-led initiative" with one specific
  *      sentence on what the nonprofit does and your role
  *
- * 5. After May 2, 2026: BWSI Biotechnology completion
- *    → re-add to `latest` array as a "completion" type
- *    → move from `currentlyWorkingOn` to `achievements`
- *
- * 6. Sunshine Club details — currently shown as "Ongoing"
+ * 5. Sunshine Club details — currently shown as "Ongoing"
  *    → search for: communityService
  *    → find the "Sunshine Club" entry
  *    → replace `"Ongoing"` with the actual start year (e.g., "2024 – Present")
  *
- * 7. Verify mosque hours total
+ * 6. Verify mosque hours total
  *    → search for: communityService
  *    → find the "Sunday School Volunteer" entry
  *    → confirm `hours: 30` is still accurate, update if hours have grown
@@ -88,6 +84,10 @@ export interface Achievement {
 }
 
 export const achievements: Achievement[] = [
+  {
+    title: "BWSI Biotechnology — Beaver Works Summer Institute",
+    date: "May 2026",
+  },
   {
     title:
       "Harvard YPHS — Interdisciplinary Discussion on Disease and Health Award",
@@ -161,6 +161,11 @@ export interface LatestItem {
 }
 
 export const latest: LatestItem[] = [
+  {
+    date: "May 2026",
+    title: "BWSI Biotechnology — completed",
+    type: "completion",
+  },
   {
     date: "Apr 2026",
     title: "Harvard YPHS — Disease and Health Award",
@@ -484,11 +489,6 @@ export const mosqueDetail = {
 } as const;
 
 export const currentlyWorkingOn: CurrentProject[] = [
-  {
-    title: "BWSI Biotechnology",
-    detail: "Beaver Works Summer Institute course — completing May 2026",
-    status: "completing soon",
-  },
   {
     title: "BWSI AI",
     detail: "Beaver Works Summer Institute AI course",
