@@ -248,29 +248,12 @@ button:focus-visible {
   }
 }
 
-.orbital-orbit {
-  will-change: transform;
-}
-
 .orbital-node-slot {
-  /* Position the slot at the ring radius along its --angle. The slot itself
-     rotates with the parent .orbital-orbit via the JS-driven transform. */
-  transform: rotate(var(--angle)) translate(var(--orbit-radius));
-}
-
-.orbital-node-counter {
-  /* JS sets transform: rotate(-A) on this each frame, cancelling the parent
-     orbit's rotation A. Both come from the same angleRef in the same rAF
-     tick, so they can never drift. */
-  display: block;
+  /* JS sets transform: translate(...) on this each frame from a single
+     rotation value. No rotating parent and no counter-rotation = no
+     possibility of drift, since labels are upright by construction
+     (the node content is never rotated at all). */
   will-change: transform;
-}
-
-.orbital-node-upright {
-  /* Cancel the slot's static --angle rotation so node contents face the
-     viewer regardless of where they sit on the ring. */
-  display: block;
-  transform: rotate(calc(-1 * var(--angle)));
 }
 
 .orbital-node {

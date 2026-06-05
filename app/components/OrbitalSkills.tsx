@@ -27,6 +27,13 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const ROTATION_PERIOD_MS = 60_000;
+const DEFAULT_RADIUS = 260;
+
+function radiusForWidth(w: number): number {
+  if (w >= 1280) return 300;
+  if (w >= 768) return 260;
+  return 110;
+}
 
 interface OrbitalSkillsProps {
   className?: string;
@@ -34,12 +41,18 @@ interface OrbitalSkillsProps {
 
 export function OrbitalSkills({ className = "" }: OrbitalSkillsProps) {
   const [reducedMotion, setReducedMotion] = useState(false);
-  const orbitRef = useRef<HTMLUListElement | null>(null);
-  const counterRefs = useRef<Array<HTMLElement | null>>([]);
-  const angleRef = useRef(0);
+  const [radius, setRadius] = useState(DEFAULT_RADIUS);
+
+  const nodeRefs = useRef<Array<HTMLLIElement | null>>([]);
+  const rotationRef = useRef(0);
   const lastTimeRef = useRef<number | null>(null);
   const rafRef = useRef<number | null>(null);
   const hoveredRef = useRef(0);
+  const radiusRef = useRef(radius);
+
+  useEffect(() => {
+    radiusRef.current = radius;
+  }, [radius]);
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -49,20 +62,43 @@ export function OrbitalSkills({ className = "" }: OrbitalSkillsProps) {
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  const applyTransforms = useCallback((angle: number) => {
-    if (orbitRef.current) {
-      orbitRef.current.style.transform = `rotate(${angle}deg)`;
-    }
-    const counter = `rotate(${-angle}deg)`;
-    for (const el of counterRefs.current) {
-      if (el) el.style.transform = counter;
-    }
+  useEffect(() => {
+    const update = () => setRadius(radiusForWidth(window.innerWidth));
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
   }, []);
 
+  const nodeCount = orbitalSkills.length;
+
+  const applyPositions = useCallback(
+    (rotation: number) => {
+      const r = radiusRef.current;
+      for (let i = 0; i < nodeRefs.current.length; i++) {
+        const el = nodeRefs.current[i];
+        if (!el) continue;
+        const baseDeg = (i / nodeCount) * 360;
+        const a = ((baseDeg + rotation) * Math.PI) / 180;
+        const x = Math.cos(a) * r;
+        const y = Math.sin(a) * r;
+        el.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+      }
+    },
+    [nodeCount]
+  );
+
+  // Keep static positions in sync when radius changes (resize or reduced motion).
+  useEffect(() => {
+    applyPositions(rotationRef.current);
+  }, [radius, applyPositions]);
+
+  // Single-source-of-truth rAF loop. Both x and y of every node are recomputed
+  // each frame from the same `rotationRef.current`, so the nodes cannot drift
+  // apart from each other no matter how long the page has been open.
   useEffect(() => {
     if (reducedMotion) {
-      angleRef.current = 0;
-      applyTransforms(0);
+      rotationRef.current = 0;
+      applyPositions(0);
       return;
     }
 
@@ -74,9 +110,9 @@ export function OrbitalSkills({ className = "" }: OrbitalSkillsProps) {
       lastTimeRef.current = now;
 
       if (hoveredRef.current === 0) {
-        angleRef.current = (angleRef.current + dt * degreesPerMs) % 360;
+        rotationRef.current = (rotationRef.current + dt * degreesPerMs) % 360;
       }
-      applyTransforms(angleRef.current);
+      applyPositions(rotationRef.current);
 
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -88,7 +124,7 @@ export function OrbitalSkills({ className = "" }: OrbitalSkillsProps) {
       rafRef.current = null;
       lastTimeRef.current = null;
     };
-  }, [reducedMotion, applyTransforms]);
+  }, [reducedMotion, applyPositions]);
 
   const enterNode = useCallback(() => {
     hoveredRef.current += 1;
@@ -102,7 +138,17 @@ export function OrbitalSkills({ className = "" }: OrbitalSkillsProps) {
     hoveredRef.current = 0;
   }, []);
 
-  const nodeCount = orbitalSkills.length;
+  // Initial inline style for SSR / before rAF runs. Uses DEFAULT_RADIUS so
+  // server and client agree at hydration time; the resize effect adjusts on
+  // mount before the visitor sees anything (entry fade covers any reflow).
+  const initialStyle = (i: number): React.CSSProperties => {
+    const a = ((i / nodeCount) * 360 * Math.PI) / 180;
+    const x = Math.cos(a) * DEFAULT_RADIUS;
+    const y = Math.sin(a) * DEFAULT_RADIUS;
+    return {
+      transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+    };
+  };
 
   return (
     <motion.div
@@ -148,37 +194,28 @@ export function OrbitalSkills({ className = "" }: OrbitalSkillsProps) {
           </span>
         </div>
 
-        <ul ref={orbitRef} className="orbital-orbit absolute inset-0">
+        <ul className="absolute inset-0">
           {orbitalSkills.map((skill, i) => {
             const Icon = iconMap[skill.icon] ?? Code;
-            const angle = (i / nodeCount) * 360;
             return (
               <li
                 key={skill.id}
+                ref={(el) => {
+                  nodeRefs.current[i] = el;
+                }}
                 className="orbital-node-slot absolute top-1/2 left-1/2"
-                style={{ ["--angle" as string]: `${angle}deg` }}
+                style={initialStyle(i)}
+                onMouseEnter={enterNode}
+                onMouseLeave={leaveNode}
               >
-                <span
-                  ref={(el) => {
-                    counterRefs.current[i] = el;
-                  }}
-                  className="orbital-node-counter"
-                >
-                  <span className="orbital-node-upright">
-                    <span
-                      className="orbital-node group"
-                      onMouseEnter={enterNode}
-                      onMouseLeave={leaveNode}
-                    >
-                      <span className="orbital-node__icon">
-                        <Icon
-                          aria-hidden="true"
-                          className="h-5 w-5 text-white/85 transition-colors duration-200 group-hover:text-[#5DCAA5]"
-                        />
-                      </span>
-                      <span className="orbital-node__label">{skill.title}</span>
-                    </span>
+                <span className="orbital-node group">
+                  <span className="orbital-node__icon">
+                    <Icon
+                      aria-hidden="true"
+                      className="h-5 w-5 text-white/85 transition-colors duration-200 group-hover:text-[#5DCAA5]"
+                    />
                   </span>
+                  <span className="orbital-node__label">{skill.title}</span>
                 </span>
               </li>
             );
