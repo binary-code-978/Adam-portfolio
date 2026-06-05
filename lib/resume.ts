@@ -40,6 +40,24 @@
  * ────────────────────────────────────────────────────────────────────
  */
 
+export interface OrbitalSkill {
+  id: number;
+  title: string;
+  icon: string;
+  related: number[];
+}
+
+export const orbitalSkills: OrbitalSkill[] = [
+  { id: 1, title: "Python", icon: "Code", related: [6] },
+  { id: 2, title: "PCR & Electrophoresis", icon: "Dna", related: [3, 4] },
+  { id: 3, title: "Cell Culture", icon: "FlaskConical", related: [2, 4] },
+  { id: 4, title: "Microscopy", icon: "Microscope", related: [2, 3] },
+  { id: 5, title: "Field Research", icon: "Trees", related: [6, 7] },
+  { id: 6, title: "Data Analysis", icon: "BarChart3", related: [1, 5] },
+  { id: 7, title: "Lab Documentation", icon: "FileText", related: [5] },
+  { id: 8, title: "GCP Certified", icon: "BadgeCheck", related: [] },
+];
+
 export const heroTypewriterPhrases: string[] = [
   "one base pair at a time",
   "one experiment at a time",

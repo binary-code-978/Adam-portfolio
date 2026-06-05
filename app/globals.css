@@ -136,3 +136,208 @@ button:focus-visible {
     transform: none;
   }
 }
+
+/* ───────── Orbital skills ───────── */
+
+.orbital-bg {
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(56, 189, 248, 0.08),
+      transparent 60%
+    ),
+    #050a14;
+}
+
+.orbital-stage {
+  --orbit-radius: 260px;
+  --hub-size: 120px;
+  --ring-rotation: 60s;
+}
+
+@media (max-width: 768px) {
+  .orbital-stage {
+    --orbit-radius: 140px;
+    --hub-size: 92px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .orbital-stage {
+    --orbit-radius: 300px;
+  }
+}
+
+.orbital-ring {
+  pointer-events: none;
+  box-shadow: 0 0 32px rgba(56, 189, 248, 0.06) inset;
+}
+
+.orbital-ring--outer {
+  width: calc(var(--orbit-radius) * 2 + 96px);
+  height: calc(var(--orbit-radius) * 2 + 96px);
+}
+.orbital-ring--mid {
+  width: calc(var(--orbit-radius) * 2);
+  height: calc(var(--orbit-radius) * 2);
+}
+.orbital-ring--inner {
+  width: calc(var(--orbit-radius) * 2 - 96px);
+  height: calc(var(--orbit-radius) * 2 - 96px);
+}
+
+.orbital-hub {
+  width: var(--hub-size);
+  height: var(--hub-size);
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(125, 211, 252, 0.35),
+      rgba(8, 47, 73, 0.4) 70%
+    );
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  box-shadow:
+    0 0 40px rgba(56, 189, 248, 0.35),
+    inset 0 0 24px rgba(56, 189, 248, 0.25);
+}
+
+.orbital-hub__core {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(186, 230, 253, 0.5),
+    rgba(8, 47, 73, 0) 70%
+  );
+}
+
+.orbital-hub__pulse {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(125, 211, 252, 0.45),
+    transparent 70%
+  );
+  animation: orbital-hub-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes orbital-hub-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.18);
+  }
+}
+
+.orbital-orbit {
+  animation: orbital-rotate var(--ring-rotation) linear infinite;
+  will-change: transform;
+}
+
+.orbital-orbit--static,
+.orbital-stage:hover .orbital-orbit {
+  animation-play-state: paused;
+}
+
+@keyframes orbital-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbital-node-slot {
+  /* Position the slot at the ring radius along its --angle. The slot itself
+     also rotates with the parent .orbital-orbit (it has no animation here). */
+  transform: rotate(var(--angle)) translate(var(--orbit-radius));
+}
+
+.orbital-node-counter {
+  /* Counter-rotate to cancel the parent orbit's animated rotation, so the
+     node contents stay visually upright while the ring spins. Static
+     positioning transforms live on sibling elements, never on this one. */
+  display: block;
+  animation: orbital-counter-rotate var(--ring-rotation) linear infinite;
+}
+
+.orbital-node-upright {
+  /* Cancel the slot's static --angle rotation so node contents face the
+     viewer regardless of where they sit on the ring. */
+  display: block;
+  transform: rotate(calc(-1 * var(--angle)));
+}
+
+.orbital-orbit--static .orbital-node-counter,
+.orbital-stage:hover .orbital-node-counter {
+  animation-play-state: paused;
+}
+
+@keyframes orbital-counter-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.orbital-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transform: translate(-50%, -50%);
+  transition:
+    transform 200ms ease-out,
+    filter 200ms ease-out;
+}
+
+.orbital-node:hover {
+  transform: translate(-50%, -50%) scale(1.18);
+  z-index: 5;
+  filter: drop-shadow(0 0 12px rgba(125, 211, 252, 0.65));
+}
+
+.orbital-node__icon {
+  display: flex;
+  height: 44px;
+  width: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(8, 47, 73, 0.6);
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  box-shadow:
+    0 0 14px rgba(56, 189, 248, 0.35),
+    inset 0 0 8px rgba(56, 189, 248, 0.2);
+  transition:
+    box-shadow 200ms ease-out,
+    border-color 200ms ease-out;
+}
+
+.orbital-node:hover .orbital-node__icon {
+  border-color: rgba(186, 230, 253, 0.9);
+  box-shadow:
+    0 0 22px rgba(125, 211, 252, 0.65),
+    inset 0 0 12px rgba(125, 211, 252, 0.45);
+}
+
+.orbital-node__label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(186, 230, 253, 0.85);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbital-orbit,
+  .orbital-node-slot,
+  .orbital-hub__pulse {
+    animation: none;
+  }
+}

@@ -9,6 +9,7 @@ import { EducationCard } from "./components/cards/EducationCard";
 import { SkillsCard } from "./components/cards/SkillsCard";
 import { AchievementsCard } from "./components/cards/AchievementsCard";
 import { LeadershipCard } from "./components/cards/LeadershipCard";
+import { OrbitalSkills } from "./components/OrbitalSkills";
 import { ProjectsCard } from "./components/cards/ProjectsCard";
 import { CommunityServiceCard } from "./components/cards/CommunityServiceCard";
 import { ActivitiesCard } from "./components/cards/ActivitiesCard";
@@ -34,6 +35,11 @@ export default function Home() {
           <SkillsCard className="md:col-span-3 md:row-span-1" index={7} />
           <LeadershipCard className="md:col-span-3 md:row-span-2" index={8} />
           <ProjectsCard className="md:col-span-3 md:row-span-2" index={9} />
+        </div>
+        <section className="mt-3 h-[700px] w-full overflow-hidden rounded-2xl">
+          <OrbitalSkills />
+        </section>
+        <div className="mt-3 grid grid-cols-1 md:grid-cols-6 gap-3 md:[grid-auto-rows:minmax(90px,auto)]">
           <CommunityServiceCard className="md:col-span-3 md:row-span-2" index={10} />
           <ActivitiesCard className="md:col-span-3 md:row-span-2" index={11} />
           <ContactCard id="contact" className="md:col-span-6 md:row-span-2" index={12} />
