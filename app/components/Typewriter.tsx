@@ -11,7 +11,7 @@ type Phase = "typing" | "holding" | "deleting" | "pausing";
 
 const TYPE_SPEED_MS = 70;
 const DELETE_SPEED_MS = 40;
-const HOLD_MS = 1600;
+const HOLD_MS = 4800;
 const PAUSE_MS = 400;
 
 export function Typewriter({ phrases, className = "" }: TypewriterProps) {
