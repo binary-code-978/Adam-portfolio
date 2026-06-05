@@ -8,7 +8,7 @@ import { WorkCard } from "./components/cards/WorkCard";
 import { EducationCard } from "./components/cards/EducationCard";
 import { AchievementsCard } from "./components/cards/AchievementsCard";
 import { LeadershipCard } from "./components/cards/LeadershipCard";
-import { PinnedOrbital } from "./components/PinnedOrbital";
+import { OrbitalSkills } from "./components/OrbitalSkills";
 import { ProjectsCard } from "./components/cards/ProjectsCard";
 import { CommunityServiceCard } from "./components/cards/CommunityServiceCard";
 import { ActivitiesCard } from "./components/cards/ActivitiesCard";
@@ -58,7 +58,9 @@ export default function Home() {
           </div>
         </div>
 
-        <PinnedOrbital />
+        <section className="my-10 h-[80vh] w-full sm:my-16">
+          <OrbitalSkills />
+        </section>
 
         <div className="mx-auto max-w-6xl px-5 pb-10 sm:px-8 sm:pb-16">
           <div className="grid grid-cols-1 md:grid-cols-6 gap-3 md:[grid-auto-rows:minmax(90px,auto)]">

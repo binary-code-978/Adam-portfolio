@@ -139,20 +139,25 @@ button:focus-visible {
 
 /* ───────── Orbital skills ───────── */
 
+/* Rotation is JS-driven (single rAF source of truth) — both the orbit ring
+   and the per-node counter-rotation get inline transforms from the same
+   angle each frame, so they cannot drift apart over time. CSS handles
+   only static positioning and visuals. */
+
 .orbital-bg {
   background:
     radial-gradient(
       circle at 50% 50%,
-      rgba(56, 189, 248, 0.08),
-      transparent 60%
+      rgba(93, 202, 165, 0.08),
+      rgba(175, 169, 236, 0.04) 45%,
+      transparent 70%
     ),
-    #050a14;
+    #0a0a0c;
 }
 
 .orbital-stage {
   --orbit-radius: 260px;
   --hub-size: 120px;
-  --ring-rotation: 60s;
 }
 
 @media (max-width: 768px) {
@@ -177,7 +182,16 @@ button:focus-visible {
 
 .orbital-ring {
   pointer-events: none;
-  box-shadow: 0 0 32px rgba(56, 189, 248, 0.06) inset;
+  border: 1px solid rgba(93, 202, 165, 0.12);
+  box-shadow: 0 0 32px rgba(93, 202, 165, 0.06) inset;
+}
+
+.orbital-ring--mid {
+  border-color: rgba(133, 183, 235, 0.14);
+}
+
+.orbital-ring--inner {
+  border-color: rgba(175, 169, 236, 0.16);
 }
 
 .orbital-ring--outer {
@@ -196,31 +210,28 @@ button:focus-visible {
 .orbital-hub {
   width: var(--hub-size);
   height: var(--hub-size);
-  background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(125, 211, 252, 0.35),
-      rgba(8, 47, 73, 0.4) 70%
-    );
-  border: 1px solid rgba(125, 211, 252, 0.45);
+  background: linear-gradient(135deg, #5dcaa5 0%, #85b7eb 100%);
+  border: 1px solid rgba(133, 183, 235, 0.6);
   box-shadow:
-    0 0 40px rgba(56, 189, 248, 0.35),
-    inset 0 0 24px rgba(56, 189, 248, 0.25);
+    0 0 40px rgba(93, 202, 165, 0.35),
+    0 0 80px rgba(133, 183, 235, 0.2),
+    inset 0 0 24px rgba(10, 10, 12, 0.35);
 }
 
 .orbital-hub__core {
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(186, 230, 253, 0.5),
-    rgba(8, 47, 73, 0) 70%
+    rgba(255, 255, 255, 0.35),
+    rgba(10, 10, 12, 0) 70%
   );
 }
 
 .orbital-hub__pulse {
   background: radial-gradient(
     circle at 50% 50%,
-    rgba(125, 211, 252, 0.45),
-    transparent 70%
+    rgba(93, 202, 165, 0.45),
+    rgba(133, 183, 235, 0.25) 50%,
+    transparent 75%
   );
   animation: orbital-hub-pulse 3.2s ease-in-out infinite;
 }
@@ -238,36 +249,21 @@ button:focus-visible {
 }
 
 .orbital-orbit {
-  animation: orbital-rotate var(--ring-rotation) linear infinite;
   will-change: transform;
-}
-
-.orbital-orbit--static,
-.orbital-stage:hover .orbital-orbit {
-  animation-play-state: paused;
-}
-
-@keyframes orbital-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .orbital-node-slot {
   /* Position the slot at the ring radius along its --angle. The slot itself
-     also rotates with the parent .orbital-orbit (it has no animation here). */
+     rotates with the parent .orbital-orbit via the JS-driven transform. */
   transform: rotate(var(--angle)) translate(var(--orbit-radius));
 }
 
 .orbital-node-counter {
-  /* Counter-rotate to cancel the parent orbit's animated rotation, so the
-     node contents stay visually upright while the ring spins. Static
-     positioning transforms live on sibling elements, never on this one. */
+  /* JS sets transform: rotate(-A) on this each frame, cancelling the parent
+     orbit's rotation A. Both come from the same angleRef in the same rAF
+     tick, so they can never drift. */
   display: block;
-  animation: orbital-counter-rotate var(--ring-rotation) linear infinite;
+  will-change: transform;
 }
 
 .orbital-node-upright {
@@ -275,20 +271,6 @@ button:focus-visible {
      viewer regardless of where they sit on the ring. */
   display: block;
   transform: rotate(calc(-1 * var(--angle)));
-}
-
-.orbital-orbit--static .orbital-node-counter,
-.orbital-stage:hover .orbital-node-counter {
-  animation-play-state: paused;
-}
-
-@keyframes orbital-counter-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
 }
 
 .orbital-node {
@@ -305,7 +287,7 @@ button:focus-visible {
 .orbital-node:hover {
   transform: translate(-50%, -50%) scale(1.18);
   z-index: 5;
-  filter: drop-shadow(0 0 12px rgba(125, 211, 252, 0.65));
+  filter: drop-shadow(0 0 12px rgba(93, 202, 165, 0.55));
 }
 
 .orbital-node__icon {
@@ -315,35 +297,33 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
-  background: rgba(8, 47, 73, 0.6);
-  border: 1px solid rgba(125, 211, 252, 0.45);
+  background: rgba(19, 19, 22, 0.85);
+  border: 1px solid rgba(93, 202, 165, 0.4);
   box-shadow:
-    0 0 14px rgba(56, 189, 248, 0.35),
-    inset 0 0 8px rgba(56, 189, 248, 0.2);
+    0 0 14px rgba(93, 202, 165, 0.25),
+    inset 0 0 8px rgba(93, 202, 165, 0.15);
   transition:
     box-shadow 200ms ease-out,
     border-color 200ms ease-out;
 }
 
 .orbital-node:hover .orbital-node__icon {
-  border-color: rgba(186, 230, 253, 0.9);
+  border-color: rgba(133, 183, 235, 0.85);
   box-shadow:
-    0 0 22px rgba(125, 211, 252, 0.65),
-    inset 0 0 12px rgba(125, 211, 252, 0.45);
+    0 0 22px rgba(133, 183, 235, 0.5),
+    inset 0 0 12px rgba(93, 202, 165, 0.35);
 }
 
 .orbital-node__label {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.04em;
-  color: rgba(186, 230, 253, 0.85);
+  color: rgba(255, 255, 255, 0.75);
   text-align: center;
   white-space: nowrap;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .orbital-orbit,
-  .orbital-node-slot,
   .orbital-hub__pulse {
     animation: none;
   }
