@@ -1,4 +1,5 @@
 import { Nav } from "./components/Nav";
+import { IntroOverlay } from "./components/IntroOverlay";
 import { HeroCard } from "./components/cards/HeroCard";
 import { CurrentlyWorkingOnCard } from "./components/cards/CurrentlyWorkingOnCard";
 import { LatestStrip } from "./components/LatestStrip";
@@ -16,6 +17,7 @@ import { ContactCard } from "./components/cards/ContactCard";
 export default function Home() {
   return (
     <>
+      <IntroOverlay />
       <Nav />
       <main className="mx-auto max-w-6xl px-5 py-10 sm:px-8 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-3 md:[grid-auto-rows:minmax(90px,auto)]">
