@@ -87,7 +87,7 @@ export function IntroOverlay() {
           transition={{ duration: fadeDuration, ease: "easeOut" }}
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050506] px-6 text-center"
         >
-          <h2 className="bg-gradient-to-r from-[#5DCAA5] via-[#85B7EB] to-[#AFA9EC] bg-clip-text text-3xl font-medium tracking-tight text-transparent sm:text-5xl md:text-6xl">
+          <h2 className="bg-gradient-to-r from-[#5DCAA5] via-[#85B7EB] to-[#AFA9EC] bg-clip-text pb-2 text-3xl font-medium leading-[1.15] tracking-tight text-transparent sm:text-5xl md:text-6xl">
             Ready to see greatness?
           </h2>
 
