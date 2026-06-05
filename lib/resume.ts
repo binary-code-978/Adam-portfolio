@@ -40,6 +40,13 @@
  * ────────────────────────────────────────────────────────────────────
  */
 
+export const heroTypewriterPhrases: string[] = [
+  "one base pair at a time",
+  "one experiment at a time",
+  "one question at a time",
+  "from the field to the lab",
+];
+
 export interface Contact {
   name: string;
   address: string;

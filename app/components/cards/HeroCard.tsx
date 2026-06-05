@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { resume } from "@/lib/resume";
+import { resume, heroTypewriterPhrases } from "@/lib/resume";
+import { Typewriter } from "../Typewriter";
 
 interface HeroCardProps {
   className?: string;
@@ -78,10 +79,24 @@ export function HeroCard({ className = "", index = 0, id }: HeroCardProps) {
         <div className="mb-5 text-[11px] font-medium uppercase tracking-[0.14em] text-white/55">
           {resume.contact.name.toLowerCase()} — portfolio
         </div>
-        <h1 className="text-[28px] sm:text-4xl md:text-5xl font-medium leading-[1.05] tracking-[-0.02em] text-white break-words">
-          Engineering biology,{" "}
-          <span className="bg-gradient-to-r from-[#5DCAA5] via-[#85B7EB] to-[#AFA9EC] bg-clip-text text-transparent">
-            one base pair at a time.
+        <h1 className="grid text-[28px] sm:text-4xl md:text-5xl font-medium leading-[1.05] tracking-[-0.02em] text-white break-words">
+          <span
+            aria-hidden="true"
+            className="invisible col-start-1 row-start-1"
+          >
+            Engineering biology,{" "}
+            {
+              heroTypewriterPhrases.reduce((a, b) =>
+                a.length >= b.length ? a : b
+              )
+            }
+          </span>
+          <span className="col-start-1 row-start-1">
+            Engineering biology,{" "}
+            <Typewriter
+              phrases={heroTypewriterPhrases}
+              className="bg-gradient-to-r from-[#5DCAA5] via-[#85B7EB] to-[#AFA9EC] bg-clip-text text-transparent"
+            />
           </span>
         </h1>
       </div>

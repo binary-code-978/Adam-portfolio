@@ -24,3 +24,18 @@ button:focus-visible {
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+@keyframes typewriter-cursor-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.01%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.typewriter-cursor {
+  animation: typewriter-cursor-blink 1s steps(1, end) infinite;
+}
