@@ -2,8 +2,25 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLenis } from "./SmoothScroll";
 
 const STORAGE_KEY = "introSeen";
+
+function scrollToTop(lenis: ReturnType<typeof useLenis>["current"]) {
+  if (typeof window === "undefined") return;
+  try {
+    window.scrollTo(0, 0);
+  } catch {
+    /* ignore */
+  }
+  if (lenis) {
+    try {
+      lenis.scrollTo(0, { immediate: true });
+    } catch {
+      /* ignore */
+    }
+  }
+}
 
 const INITIAL_HOLD_MS = 900;
 const DELETE_PER_CHAR_MS = 60;
@@ -98,9 +115,22 @@ export function IntroOverlay() {
   const [visible, setVisible] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const lenisRef = useLenis();
 
   useEffect(() => {
     setMounted(true);
+
+    if (
+      typeof window !== "undefined" &&
+      "scrollRestoration" in window.history
+    ) {
+      try {
+        window.history.scrollRestoration = "manual";
+      } catch {
+        /* ignore */
+      }
+    }
+
     if (!readSeen()) setVisible(true);
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -111,12 +141,19 @@ export function IntroOverlay() {
   }, []);
 
   const dismiss = useCallback(() => {
+    scrollToTop(lenisRef.current);
     writeSeen();
     setVisible(false);
-  }, []);
+  }, [lenisRef]);
 
   useEffect(() => {
     if (!visible) return;
+
+    scrollToTop(lenisRef.current);
+    lenisRef.current?.stop();
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const previouslyFocused =
       typeof document !== "undefined"
@@ -135,9 +172,11 @@ export function IntroOverlay() {
 
     return () => {
       window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previousOverflow;
+      lenisRef.current?.start();
       previouslyFocused?.focus?.();
     };
-  }, [visible, dismiss]);
+  }, [visible, dismiss, lenisRef]);
 
   if (!mounted) return null;
 
