@@ -5,6 +5,76 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const STORAGE_KEY = "introSeen";
 
+const INITIAL_HOLD_MS = 900;
+const DELETE_PER_CHAR_MS = 60;
+const PAUSE_BETWEEN_MS = 200;
+const TYPE_PER_CHAR_MS = 70;
+const START_WORD = "see";
+const END_WORD = "experience";
+
+function IntroHeadingWord({ reducedMotion }: { reducedMotion: boolean }) {
+  const [word, setWord] = useState(reducedMotion ? END_WORD : START_WORD);
+  const [done, setDone] = useState(reducedMotion);
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setWord(END_WORD);
+      setDone(true);
+      return;
+    }
+
+    setWord(START_WORD);
+    setDone(false);
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const schedule = (fn: () => void, delay: number) => {
+      timers.push(setTimeout(fn, delay));
+    };
+
+    schedule(() => {
+      let current = START_WORD;
+
+      const deleteStep = () => {
+        if (current.length === 0) {
+          schedule(typeNext, PAUSE_BETWEEN_MS);
+          return;
+        }
+        current = current.slice(0, -1);
+        setWord(current);
+        schedule(deleteStep, DELETE_PER_CHAR_MS);
+      };
+
+      const typeNext = () => {
+        if (current.length === END_WORD.length) {
+          setDone(true);
+          return;
+        }
+        current = END_WORD.slice(0, current.length + 1);
+        setWord(current);
+        schedule(typeNext, TYPE_PER_CHAR_MS);
+      };
+
+      deleteStep();
+    }, INITIAL_HOLD_MS);
+
+    return () => {
+      timers.forEach(clearTimeout);
+    };
+  }, [reducedMotion]);
+
+  return (
+    <>
+      <span>{word}</span>
+      {!done ? (
+        <span
+          aria-hidden="true"
+          className="typewriter-cursor ml-[2px] inline-block h-[0.85em] w-[3px] -mb-[0.05em] translate-y-[0.05em] bg-[#85B7EB] align-baseline"
+        />
+      ) : null}
+    </>
+  );
+}
+
 function readSeen(): boolean {
   if (typeof window === "undefined") return true;
   try {
@@ -88,7 +158,7 @@ export function IntroOverlay() {
           className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050506] px-6 text-center"
         >
           <h2 className="bg-gradient-to-r from-[#5DCAA5] via-[#85B7EB] to-[#AFA9EC] bg-clip-text pb-2 text-3xl font-medium leading-[1.15] tracking-tight text-transparent sm:text-5xl md:text-6xl">
-            Ready to see greatness?
+            Ready to <IntroHeadingWord reducedMotion={reducedMotion} /> greatness?
           </h2>
 
           <button
