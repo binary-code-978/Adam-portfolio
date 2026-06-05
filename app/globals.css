@@ -157,8 +157,15 @@ button:focus-visible {
 
 @media (max-width: 768px) {
   .orbital-stage {
-    --orbit-radius: 140px;
-    --hub-size: 92px;
+    --orbit-radius: 110px;
+    --hub-size: 80px;
+  }
+  .orbital-node__icon {
+    height: 38px;
+    width: 38px;
+  }
+  .orbital-node__label {
+    font-size: 10px;
   }
 }
 
