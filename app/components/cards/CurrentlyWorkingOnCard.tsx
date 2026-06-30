@@ -1,12 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { currentlyWorkingOn, type CurrentProject } from "@/lib/resume";
+import {
+  currentlyWorkingOn,
+  type CurrentProject,
+  type CurrentProjectCategory,
+} from "@/lib/resume";
+import {
+  SectionedList,
+  type SectionedListGroup,
+  type SectionedListItem,
+} from "../SectionedList";
 
 interface CurrentlyWorkingOnCardProps {
   className?: string;
   index?: number;
-  maxItems?: number;
 }
 
 function StatusPill({ status }: { status: CurrentProject["status"] }) {
@@ -27,15 +35,43 @@ function StatusPill({ status }: { status: CurrentProject["status"] }) {
   );
 }
 
+const groups: SectionedListGroup<CurrentProjectCategory>[] = [
+  { category: "research", label: "Research", accentHex: "#85B7EB", icon: "◆" },
+  { category: "program", label: "Programs", accentHex: "#5DCAA5", icon: "▲" },
+  { category: "community", label: "Community", accentHex: "#AFA9EC", icon: "●" },
+  {
+    category: "personal",
+    label: "Personal",
+    accentHex: "rgba(255,255,255,0.40)",
+    icon: "○",
+  },
+];
+
+const filters: ReadonlyArray<{
+  value: CurrentProjectCategory | "all";
+  label: string;
+}> = [
+  { value: "all", label: "All" },
+  { value: "research", label: "Research" },
+  { value: "program", label: "Programs" },
+  { value: "personal", label: "Personal" },
+];
+
 export function CurrentlyWorkingOnCard({
   className = "",
   index = 0,
-  maxItems,
 }: CurrentlyWorkingOnCardProps) {
-  const items =
-    typeof maxItems === "number"
-      ? currentlyWorkingOn.slice(0, maxItems)
-      : currentlyWorkingOn;
+  const items: SectionedListItem<CurrentProjectCategory>[] =
+    currentlyWorkingOn.map((project) => ({
+      id: project.title,
+      title: project.title,
+      detail: project.detail,
+      category: project.category,
+      rightSlot:
+        project.status !== "active" ? (
+          <StatusPill status={project.status} />
+        ) : undefined,
+    }));
 
   return (
     <motion.div
@@ -61,27 +97,12 @@ export function CurrentlyWorkingOnCard({
         </span>
       </div>
 
-      <ul className="flex flex-col">
-        {items.map((item, i) => (
-          <li
-            key={item.title}
-            className={
-              "flex items-start justify-between gap-3 py-3 " +
-              (i > 0 ? "border-t border-white/[0.06]" : "")
-            }
-          >
-            <div className="min-w-0">
-              <div className="text-sm font-medium text-white">
-                {item.title}
-              </div>
-              <div className="mt-0.5 text-xs text-white/55">{item.detail}</div>
-            </div>
-            <div className="shrink-0 pt-0.5">
-              <StatusPill status={item.status} />
-            </div>
-          </li>
-        ))}
-      </ul>
+      <SectionedList
+        items={items}
+        groups={groups}
+        filters={filters}
+        defaultFilter="all"
+      />
     </motion.div>
   );
 }
