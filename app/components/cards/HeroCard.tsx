@@ -104,7 +104,7 @@ export function HeroCard({ className = "", index = 0, id }: HeroCardProps) {
       <div className="relative mt-8">
         <div className="mb-4 text-sm text-white/60">
           {dartmouth
-            ? `10th grade · ${dartmouth.school} · ${dartmouth.location}`
+            ? `11th grade · ${dartmouth.school} · ${dartmouth.location}`
             : null}
         </div>
         <ul className="flex flex-wrap gap-2">
