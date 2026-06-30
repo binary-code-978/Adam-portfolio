@@ -34,18 +34,19 @@ export function CommunityServiceCard({
         {communityService.map((item, i) => {
           const dividerClass = i > 0 ? "border-t border-white/[0.06]" : "";
 
-          const content = (
-            <>
-              <div className="min-w-0">
-                <div className="text-sm font-medium text-white">
-                  {item.title}
-                </div>
-                <div className="mt-0.5 text-xs text-white/45">
-                  {item.organization} · {item.dateRange}
-                </div>
-                <div className="mt-1 text-xs text-white/65">{item.summary}</div>
+          const leftColumn = (
+            <div className="min-w-0">
+              <div className="text-sm font-medium text-white">{item.title}</div>
+              <div className="mt-0.5 text-xs text-white/45">
+                {item.organization} · {item.dateRange}
               </div>
-            </>
+              <div className="mt-1 text-xs text-white/65">{item.summary}</div>
+              {item.href ? (
+                <div className="mt-2 text-[11px] font-medium text-[#5DCAA5]/80 transition-colors duration-200 group-hover:text-[#5DCAA5]">
+                  Read about the work →
+                </div>
+              ) : null}
+            </div>
           );
 
           if (item.href) {
@@ -53,11 +54,11 @@ export function CommunityServiceCard({
               <li key={item.title} className={dividerClass}>
                 <Link
                   href={item.href}
-                  className="group flex cursor-pointer items-start justify-between gap-3 -mx-2 rounded-lg border border-transparent px-2 py-3 transition-colors duration-200 hover:border-emerald-400/30 hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+                  className="group flex cursor-pointer items-start justify-between gap-3 -mx-2 rounded-lg border border-[#5DCAA5]/15 px-2 py-3 transition-colors duration-200 hover:border-[#5DCAA5]/40 hover:bg-white/[0.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5DCAA5]/50"
                 >
-                  {content}
+                  {leftColumn}
                   <ArrowUpRight
-                    className="mt-0.5 h-4 w-4 shrink-0 text-white/40 transition-all duration-200 group-hover:text-white/80 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    className="mt-0.5 h-4 w-4 shrink-0 text-white/65 transition-all duration-200 group-hover:text-[#5DCAA5] group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     aria-hidden="true"
                   />
                 </Link>
@@ -67,7 +68,7 @@ export function CommunityServiceCard({
 
           return (
             <li key={item.title} className={"py-3 " + dividerClass}>
-              {content}
+              {leftColumn}
             </li>
           );
         })}

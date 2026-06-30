@@ -25,6 +25,7 @@ export function ResearchCard({ className = "", index = 0, id }: ResearchCardProp
       href="/internships/sheriff-lab"
       ariaLabel="Read about UMass field research with the Sheriff Lab"
       interactive
+      ctaLabel="Read about the lab"
     >
       <p>{research.description}</p>
       <p className="mt-3 text-xs text-white/55">

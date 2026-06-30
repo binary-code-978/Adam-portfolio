@@ -23,6 +23,7 @@ export function WorkCard({ className = "", index = 0, id }: WorkCardProps) {
       href="/internships/mlsc"
       ariaLabel="Read about the MLSC apprenticeship"
       interactive
+      ctaLabel="Read about the apprenticeship"
     >
       <p>{mlsc.description}</p>
       <p className="mt-3 text-xs text-white/55">

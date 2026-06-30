@@ -16,6 +16,11 @@ interface CardProps {
   ariaLabel?: string;
   id?: string;
   interactive?: boolean;
+  ctaLabel?: string;
+}
+
+function withArrow(label: string): string {
+  return label.trimEnd().endsWith("→") ? label : `${label} →`;
 }
 
 export function Card({
@@ -29,6 +34,7 @@ export function Card({
   ariaLabel,
   id,
   interactive = false,
+  ctaLabel,
 }: CardProps) {
   const hoverY = interactive ? -4 : -2;
   const hoverTransition = interactive
@@ -39,7 +45,7 @@ export function Card({
     "relative flex min-w-0 flex-col scroll-mt-24 rounded-2xl p-6 " +
     "border-[0.5px] " +
     (interactive
-      ? "bg-[#131316] hover:bg-[#15161a] border-white/[0.08] hover:border-emerald-400/30 cursor-pointer group "
+      ? "bg-[#131316] hover:bg-[#15161a] border-[#5DCAA5]/15 hover:border-[#5DCAA5]/40 cursor-pointer group "
       : "bg-[#131316] border-white/[0.08] hover:border-white/20 ") +
     "transition-colors duration-200 ";
 
@@ -57,7 +63,7 @@ export function Card({
         <Link
           href={href}
           aria-label={ariaLabel ?? title ?? "open"}
-          className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+          className="absolute inset-0 z-10 rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5DCAA5]/50"
         />
       ) : null}
       {arrow ? (
@@ -65,7 +71,7 @@ export function Card({
           className={
             "absolute top-5 right-5 h-4 w-4 transition-all duration-200 " +
             (interactive
-              ? "text-white/40 group-hover:text-white/80 group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              ? "text-white/65 group-hover:text-[#5DCAA5] group-hover:scale-110 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               : "text-white/50")
           }
           aria-hidden="true"
@@ -83,6 +89,11 @@ export function Card({
       ) : null}
       {children ? (
         <div className="text-sm leading-relaxed text-white/70">{children}</div>
+      ) : null}
+      {interactive && ctaLabel ? (
+        <div className="mt-4 text-[11px] font-medium text-[#5DCAA5]/80 transition-colors duration-200 group-hover:text-[#5DCAA5]">
+          {withArrow(ctaLabel)}
+        </div>
       ) : null}
     </motion.div>
   );
