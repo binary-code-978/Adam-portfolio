@@ -95,47 +95,63 @@ export interface Award {
   date: string;
 }
 
+export type CurrentProjectCategory =
+  | "research"
+  | "program"
+  | "community"
+  | "personal";
+
 export interface CurrentProject {
   title: string;
   detail: string;
   status: "active" | "completing soon" | "upcoming";
+  category: CurrentProjectCategory;
 }
+
+export type AchievementCategory = "award" | "certification" | "course";
 
 export interface Achievement {
   title: string;
   issuer?: string;
   date: string;
   href?: string;
+  category: AchievementCategory;
 }
 
 export const achievements: Achievement[] = [
   {
     title: "BWSI Biotechnology — Beaver Works Summer Institute",
     date: "May 2026",
+    category: "course",
   },
   {
     title:
       "Harvard YPHS — Interdisciplinary Discussion on Disease and Health Award",
     date: "April 2026",
     href: "/achievements/harvard-yphs",
+    category: "award",
   },
   {
     title: "Good Clinical Practice (GCP) Certification",
     issuer: "NIDA Clinical Trials Network",
     date: "April 2026",
+    category: "certification",
   },
   {
     title:
       "MITx 6.00.1x — Introduction to CS and Programming Using Python",
     date: "September 2024",
+    category: "course",
   },
   {
     title: "Dartmouth Math SMCML Tournament Winner",
     date: "April 2024",
+    category: "award",
   },
   {
     title: "BYJU'S Future School Code of Honor Certificate",
     date: "August 2022",
+    category: "course",
   },
 ];
 
@@ -518,21 +534,25 @@ export const currentlyWorkingOn: CurrentProject[] = [
     title: "BWSI AI",
     detail: "Beaver Works Summer Institute AI course",
     status: "active",
+    category: "program",
   },
   {
     title: "Yale collaboration",
     detail: "Early-stage research collaboration",
     status: "active",
+    category: "research",
   },
   {
     title: "Nonprofit project",
     detail: "Building a student-led initiative",
     status: "active",
+    category: "community",
   },
   {
     title: "Roblox game",
     detail: "Personal game development project",
     status: "active",
+    category: "personal",
   },
 ];
 
