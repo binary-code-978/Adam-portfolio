@@ -278,3 +278,14 @@ body.tour-active [data-tour-target].tour-spotlight {
     transition: none;
   }
 }
+
+/* Coach card spans the bottom on small screens (inline styles need
+   !important to override). */
+@media (max-width: 640px) {
+  .tour-coach-card {
+    bottom: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    width: auto !important;
+  }
+}
