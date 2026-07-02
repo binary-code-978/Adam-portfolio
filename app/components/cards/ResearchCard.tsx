@@ -20,6 +20,7 @@ export function ResearchCard({ className = "", index = 0, id }: ResearchCardProp
       eyebrow="summer 2025"
       title="UMass field research"
       className={className}
+      dataTourTarget="internships"
       arrow
       index={index}
       href="/internships/sheriff-lab"

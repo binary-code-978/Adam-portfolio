@@ -62,6 +62,7 @@ export function AchievementsCard({
       eyebrow="achievements"
       title="Honors & recognition"
       className={className}
+      dataTourTarget="achievements"
       index={index}
     >
       <SectionedList

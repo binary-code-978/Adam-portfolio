@@ -18,6 +18,7 @@ export function WorkCard({ className = "", index = 0, id }: WorkCardProps) {
       eyebrow="summer 2024"
       title="MLSC apprenticeship"
       className={className}
+      dataTourTarget="internships"
       arrow
       index={index}
       href="/internships/mlsc"

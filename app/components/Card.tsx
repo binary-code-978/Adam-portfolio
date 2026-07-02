@@ -17,6 +17,7 @@ interface CardProps {
   id?: string;
   interactive?: boolean;
   ctaLabel?: string;
+  dataTourTarget?: string;
 }
 
 function withArrow(label: string): string {
@@ -35,6 +36,7 @@ export function Card({
   id,
   interactive = false,
   ctaLabel,
+  dataTourTarget,
 }: CardProps) {
   const hoverY = interactive ? -4 : -2;
   const hoverTransition = interactive
@@ -52,6 +54,7 @@ export function Card({
   return (
     <motion.div
       id={id}
+      data-tour-target={dataTourTarget}
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}

@@ -34,6 +34,7 @@ export function ProjectsCard({
       eyebrow="client work"
       title="Projects"
       className={className}
+      dataTourTarget="projects"
       index={index}
     >
       <ul className="flex flex-col">

@@ -19,6 +19,7 @@ export function CommunityServiceCard({
       id={id}
       eyebrow="community service"
       className={className}
+      dataTourTarget="community"
       index={index}
     >
       <div className="mb-5">

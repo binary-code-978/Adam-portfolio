@@ -61,6 +61,7 @@ export function HeroCard({ className = "", index = 0, id }: HeroCardProps) {
   return (
     <motion.div
       id={id}
+      data-tour-target="hero"
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
