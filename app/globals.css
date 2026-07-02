@@ -251,13 +251,15 @@ body.tour-active [data-tour-target] {
     filter 300ms ease-out,
     opacity 300ms ease-out;
   filter: blur(1.5px);
-  opacity: 0.55;
+  /* !important beats framer-motion's inline opacity left on these motion.div
+     cards after their whileInView animation settles. */
+  opacity: 0.55 !important;
   will-change: filter, opacity;
 }
 
 body.tour-active [data-tour-target].tour-spotlight {
   filter: none;
-  opacity: 1;
+  opacity: 1 !important;
   border-color: #5dcaa5 !important;
   box-shadow: 0 0 0 3px rgba(93, 202, 165, 0.15);
   position: relative;
