@@ -12,6 +12,7 @@ import { ProjectsCard } from "./components/cards/ProjectsCard";
 import { CommunityServiceCard } from "./components/cards/CommunityServiceCard";
 import { ActivitiesCard } from "./components/cards/ActivitiesCard";
 import { ContactCard } from "./components/cards/ContactCard";
+import { TourRoot } from "./components/Tour/TourRoot";
 
 export default function Home() {
   return (
@@ -51,6 +52,7 @@ export default function Home() {
           © {new Date().getFullYear()} Adam Amac
         </footer>
       </main>
+      <TourRoot />
     </>
   );
 }
