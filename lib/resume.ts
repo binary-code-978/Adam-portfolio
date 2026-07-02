@@ -22,18 +22,12 @@
  *    → replace "Early-stage research collaboration" with one specific
  *      sentence on what the actual Yale connection is
  *
- * 4. Nonprofit project — replace placeholder detail
- *    → search for: currentlyWorkingOn
- *    → find the "Nonprofit project" entry
- *    → replace "Building a student-led initiative" with one specific
- *      sentence on what the nonprofit does and your role
- *
- * 5. Sunshine Club details — currently shown as "Ongoing"
+ * 4. Sunshine Club details — currently shown as "Ongoing"
  *    → search for: communityService
  *    → find the "Sunshine Club" entry
  *    → replace `"Ongoing"` with the actual start year (e.g., "2024 – Present")
  *
- * 6. Verify mosque hours total
+ * 5. Verify mosque hours total
  *    → search for: communityService
  *    → find the "Sunday School Volunteer" entry
  *    → confirm `hours: 30` is still accurate, update if hours have grown
@@ -401,22 +395,48 @@ export const mlscDetail: InternshipDetail = {
 
 export interface Project {
   title: string;
-  client: string;
+  subtitle: string;
+  description: string;
+  status: "live" | "in development";
   dateRange: string;
-  status: "in development" | "shipped" | "prototype";
-  summary: string;
-  href?: string;
+  href: string;
+  external: boolean;
+  ctaLabel: string;
 }
 
 export const projects: Project[] = [
   {
+    title: "Cell Metabolic Atlas",
+    subtitle: "3D interactive biology visualizer",
+    description:
+      "Designed a real-time 3D eukaryotic cell explorer — 9 organelles, 6 metabolic pathways with animated particle tracing, and an ELI5 mode.",
+    status: "live",
+    dateRange: "2026",
+    href: "https://cell-metabolic.vercel.app",
+    external: true,
+    ctaLabel: "Visit the site",
+  },
+  {
     title: "Amac Neurology App",
-    client: "Amac Neurology and Sleep Associates",
-    dateRange: "Spring 2026 – Present",
-    status: "in development",
-    summary:
+    subtitle: "Amac Neurology and Sleep Associates",
+    description:
       "A patient tracker app being built for a local neurology and sleep practice. Working prototype tested with physician feedback.",
+    status: "in development",
+    dateRange: "Spring 2026 – Present",
     href: "/projects/amac-neurology",
+    external: false,
+    ctaLabel: "Read about the project",
+  },
+  {
+    title: "Project Breathing Hope",
+    subtitle: "Lung cancer nonprofit redesign",
+    description:
+      "Redesigned a 12-page nonprofit site; migrated all content verbatim and tracked every issue I found (typos, dated stats, medical claims) in a flags log for the org to decide on.",
+    status: "live",
+    dateRange: "2026",
+    href: "https://project-breathing-hope.vercel.app/",
+    external: true,
+    ctaLabel: "Visit the site",
   },
 ];
 
@@ -541,12 +561,6 @@ export const currentlyWorkingOn: CurrentProject[] = [
     detail: "Early-stage research collaboration",
     status: "active",
     category: "research",
-  },
-  {
-    title: "Nonprofit project",
-    detail: "Building a student-led initiative",
-    status: "active",
-    category: "community",
   },
   {
     title: "Roblox game",
