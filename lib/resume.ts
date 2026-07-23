@@ -344,6 +344,58 @@ export const harvardYPHSDetail = {
   ],
 } as const;
 
+export const buSummerLabDetail = {
+  slug: "bu-summerlab-gene-editing",
+  title: "Gene Editing in Human Disease",
+  subtitle: "Certificate of Completion · BU CityLab SummerLab · July 2026",
+  dateRange: "July 6–17, 2026",
+  location: "Boston University, Charles River Campus · In person",
+  // NOTE: no `award` field by design. A certificate of completion is not an award
+  // and must not render in the amber recognition slot. Do not add one.
+  overview:
+    "A two-week, hands-on molecular biology intensive at Boston University's CityLab, centered on CRISPR gene editing — the technique recognized by the 2020 Nobel Prize in Chemistry. Students work through the laboratory workflow used in modern research labs to model how gene editing can be used to treat human disease, alongside the ethical questions the technology raises. The program is run by BU's Wheelock College of Education & Human Development together with the Chobanian & Avedisian School of Medicine, and is supported by an NIH Science Education Partnership Award.",
+
+  // VERIFY (Adam): this list is the program's published 2026 curriculum.
+  // Confirm each technique was in YOUR session; cut anything you didn't perform.
+  techniques: [
+    "CRISPR gene editing",
+    "Bacterial transformation",
+    "Plasmid minipreps",
+    "Cell culture",
+    "DNA quantitation",
+    "Gel electrophoresis & visualization",
+    "Nanoencapsulation",
+  ],
+
+  sections: [
+    {
+      heading: "The program",
+      body:
+        "SummerLab is a CityLab program that gives high school students access to biotechnology facilities and curriculum most schools can't offer. The Gene Editing in Human Disease session runs two weeks, Monday through Friday, on BU's Charles River Campus. Over the two weeks I worked through a guided research arc: from how a single mutation causes disease, to using CRISPR to model correcting it in a living system.",
+    },
+    {
+      heading: "The central lab — modeling a cure for sickle cell",
+      // VERIFY (Adam): this is the program's documented core lab. Confirm it matches
+      // what your group actually did, and adjust if your session differed.
+      body:
+        "The program is built around a real disease model. Working in a small group, I edited a target gene in a non-pathogenic strain of E. coli — used as a stand-in for human cells — to simulate the process scientists use to correct the mutation responsible for sickle cell anemia. Instead of reading about gene editing, I ran the bench workflow end to end and interpreted the results.",
+    },
+    {
+      heading: "Beyond the bench",
+      body:
+        "The science came with its ethics. Alongside the lab work, the program examined the social and ethical dimensions of gene editing — who it should treat, where the limits should be, and how a tool this powerful should be governed.",
+    },
+    {
+      heading: "What I took from it",
+      // TODO (Adam): replace with 2–3 sentences in your own voice — the moment or idea
+      // from the two weeks that stuck, or how it connects to your Sheriff lab / MLSC work.
+      // Write this yourself. Do not ship the placeholder. Do not fill this in for him.
+      body:
+        "[Adam to write — personal reflection goes here.]",
+    },
+  ],
+};
+
 export const mlscDetail: InternshipDetail = {
   slug: "mlsc",
   title: "MLSC apprenticeship",
