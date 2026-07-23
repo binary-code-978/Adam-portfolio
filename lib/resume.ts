@@ -394,7 +394,7 @@ export const buSummerLabDetail = {
         "[Adam to write — personal reflection goes here.]",
     },
   ],
-};
+} as const;
 
 export const mlscDetail: InternshipDetail = {
   slug: "mlsc",
