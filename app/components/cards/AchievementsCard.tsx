@@ -52,7 +52,9 @@ export function AchievementsCard({
       }`,
       category: achievement.category,
       href: achievement.href,
-      ctaLabel: achievement.href ? "Read about the project →" : undefined,
+      ctaLabel: achievement.href
+        ? achievement.ctaLabel ?? "Read about the project →"
+        : undefined,
     })
   );
 

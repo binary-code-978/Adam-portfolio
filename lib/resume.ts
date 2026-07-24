@@ -109,6 +109,7 @@ export interface Achievement {
   issuer?: string;
   date: string;
   href?: string;
+  ctaLabel?: string;
   category: AchievementCategory;
 }
 
@@ -118,6 +119,7 @@ export const achievements: Achievement[] = [
     issuer: "Boston University CityLab",
     date: "July 2026",
     href: "/achievements/bu-summerlab-gene-editing",
+    ctaLabel: "Read about the program →",
     category: "certification",
   },
   {
