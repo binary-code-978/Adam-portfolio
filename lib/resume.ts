@@ -406,14 +406,15 @@ export const buSummerLabDetail = {
       body:
         "The science came with its ethics. Alongside the lab work, the program examined the social and ethical dimensions of gene editing — who it should treat, where the limits should be, and how a tool this powerful should be governed.",
     },
-    {
-      heading: "What I took from it",
-      // TODO (Adam): replace with 2–3 sentences in your own voice — the moment or idea
-      // from the two weeks that stuck, or how it connects to your Sheriff lab / MLSC work.
-      // Write this yourself. Do not ship the placeholder. Do not fill this in for him.
-      body:
-        "[Adam to write — personal reflection goes here.]",
-    },
+    // TODO (Adam): re-add this reflection section once you've written it in your own words.
+    // {
+    //   heading: "What I took from it",
+    //   // TODO (Adam): replace with 2–3 sentences in your own voice — the moment or idea
+    //   // from the two weeks that stuck, or how it connects to your Sheriff lab / MLSC work.
+    //   // Write this yourself. Do not ship the placeholder. Do not fill this in for him.
+    //   body:
+    //     "[Adam to write — personal reflection goes here.]",
+    // },
   ],
 } as const;
 
