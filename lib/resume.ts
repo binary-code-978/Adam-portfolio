@@ -114,6 +114,13 @@ export interface Achievement {
 
 export const achievements: Achievement[] = [
   {
+    title: "BU CityLab SummerLab — Gene Editing in Human Disease",
+    issuer: "Boston University CityLab",
+    date: "July 2026",
+    href: "/achievements/bu-summerlab-gene-editing",
+    category: "certification",
+  },
+  {
     title: "BWSI Biotechnology — Beaver Works Summer Institute",
     date: "May 2026",
     category: "course",
@@ -197,6 +204,11 @@ export interface LatestItem {
 
 export const latest: LatestItem[] = [
   {
+    date: "Jul 2026",
+    title: "BU CityLab SummerLab — Gene Editing in Human Disease",
+    type: "certification",
+  },
+  {
     date: "May 2026",
     title: "BWSI Biotechnology — completed",
     type: "completion",
@@ -223,6 +235,13 @@ export interface Certification {
 }
 
 export const certifications: Certification[] = [
+  {
+    name: "Gene Editing in Human Disease",
+    issuer: "Boston University CityLab",
+    issuedDate: "July 2026",
+    description:
+      "Certificate of completion for a two-week, hands-on molecular biology intensive at BU CityLab centered on CRISPR gene editing and modeling gene-editing approaches to human disease.",
+  },
   {
     name: "Good Clinical Practice (GCP)",
     issuer: "NIDA Clinical Trials Network",
